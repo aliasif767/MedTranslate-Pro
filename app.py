@@ -20,8 +20,8 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 # === Configuration ===
-ASSEMBLY_AI_API_KEY = os.getenv("ASSEMBLY_AI_API_KEY", "d9f2c388ab74402095d900b09fceaeae")
-ELEVEN_LABS_API_KEY = os.getenv("ELEVEN_LABS_API_KEY", "sk_060f1a6af3ddbd925cf0462aed5b522537dcccf155d7641f")
+ASSEMBLY_AI_API_KEY = os.getenv("ASSEMBLY_AI_API_KEY", "abc")
+ELEVEN_LABS_API_KEY = os.getenv("ELEVEN_LABS_API_KEY", "abc")
 
 # Audio storage configuration
 STATIC_AUDIO_DIR = Path("static/audio")
@@ -33,9 +33,6 @@ CORS(app)  # Enable CORS for API calls
 app.secret_key = os.getenv("SECRET_KEY", os.urandom(24))  # Use env variable for production
 bcrypt = Bcrypt(app)
 
-# ===== VERCEL-COMPATIBLE USER STORAGE =====
-# Instead of file storage, we'll use in-memory storage with environment variables for demo
-# In production, you'd want to use a proper database like PostgreSQL, MongoDB, etc.
 
 # In-memory user storage (will reset on each deployment)
 USERS_STORAGE = {}
