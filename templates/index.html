@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professional healthcare translation platform for real-time patient-provider communication">
+    <meta name="keywords" content="healthcare, translation, medical, patient, doctor, real-time">
+    
+    <title>MedTranslate Pro - Healthcare Communication Platform</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiMwMDY2Q0MiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik04IDNWMTNNMyA4SDEzIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8L3N2Zz4KPC9zdmc+">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#0066cc">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="MedTranslate Pro">
+    
+    <style>
+        :root {
+            --primary-blue: #0066cc;
+            --primary-blue-dark: #0052a3;
+            --secondary-teal: #00a693;
+            --accent-orange: #ff6b35;
+            --background-dark: #0f1419;
+            --background-card: #1a1f2e;
+            --background-light: #252b3b;
+            --text-primary: #ffffff;
+            --text-secondary: #b4bcc8;
+            --text-muted: #6b7280;
+            --border-color: #374151;
+            --success-green: #10b981;
+            --warning-yellow: #f59e0b;
+            --error-red: #ef4444;
+            --patient-color: #3b82f6;
+            --doctor-color: #10b981;
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, var(--background-dark) 0%, #1e293b 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(90deg, var(--primary-blue) 0%, var(--secondary-teal) 100%);
+            padding: 1rem 0;
+            box-shadow: var(--shadow-lg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .logo i {
+            font-size: 2rem;
+            color: white;
+        }
+
+        .header-controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .session-info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        /* Main Layout */
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            gap: 2rem;
+            min-height: calc(100vh - 120px);
+        }
+
+        /* Side Panels */
+        .side-panel {
+            background: var(--background-card);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+            height: fit-content;
+            position: sticky;
+            top: 140px;
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .panel-header h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+
+        .panel-header .icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .patient-panel .panel-header .icon {
+            background: linear-gradient(135deg, var(--patient-color), #60a5fa);
+            color: white;
+        }
+
+        .doctor-panel .panel-header .icon {
+            background: linear-gradient(135deg, var(--doctor-color), #34d399);
+            color: white;
+        }
+
+        /* Language Selection */
+        .language-select {
+            margin-bottom: 1.5rem;
+        }
+
+        .language-select label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .language-select select {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--background-light);
+            border: 2px solid var(--border-color);
+            border-radius: 0.5rem;
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+
+        .language-select select:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+        }
+
+        /* Recording Controls */
+        .recording-controls {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .record-btn {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 0.75rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .record-btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .record-btn:hover:before {
+            left: 100%;
+        }
+
+        .record-btn.recording {
+            background: linear-gradient(135deg, var(--error-red), #f87171);
+            animation: pulse 2s infinite;
+        }
+
+        .record-btn.idle {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-blue-dark));
+        }
+
+        .record-btn.processing {
+            background: linear-gradient(135deg, var(--warning-yellow), #fbbf24);
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Status Indicators */
+        .status-indicator {
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            text-align: center;
+            margin-top: 0.75rem;
+        }
+
+        .status-idle {
+            background: rgba(107, 114, 128, 0.1);
+            color: var(--text-muted);
+        }
+
+        .status-listening {
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--patient-color);
+        }
+
+        .status-processing {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning-yellow);
+        }
+
+        /* Quick Phrases */
+        .quick-phrases {
+            margin-top: 1rem;
+        }
+
+        .quick-phrases h4 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .phrase-btn {
+            width: 100%;
+            padding: 0.5rem 0.75rem;
+            margin-bottom: 0.5rem;
+            background: var(--background-light);
+            border: 1px solid var(--border-color);
+            border-radius: 0.375rem;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+        }
+
+        .phrase-btn:hover {
+            background: var(--primary-blue);
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        /* Central Chat Area */
+        .chat-container {
+            background: var(--background-card);
+            border-radius: 1rem;
+            box-shadow: var(--shadow-xl);
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            height: calc(100vh - 200px);
+            overflow: hidden;
+        }
+
+        .chat-header {
+            padding: 1.5rem;
+            border-bottom: 2px solid var(--border-color);
+            background: linear-gradient(135deg, var(--background-light), var(--background-card));
+        }
+
+        .chat-header h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .chat-stats {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+            background: linear-gradient(180deg, var(--background-card), var(--background-dark));
+        }
+
+        .message {
+            margin-bottom: 1.5rem;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .message-avatar {
+            width: 2rem;
+            height: 2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .message-patient .message-avatar {
+            background: var(--patient-color);
+            color: white;
+        }
+
+        .message-doctor .message-avatar {
+            background: var(--doctor-color);
+            color: white;
+        }
+
+        .message-info {
+            flex: 1;
+        }
+
+        .message-role {
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .message-time {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .message-content {
+            background: var(--background-light);
+            border-radius: 1rem;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+
+        .message-patient .message-content {
+            margin-left: 2.75rem;
+            border-left: 4px solid var(--patient-color);
+        }
+
+        .message-doctor .message-content {
+            margin-left: 2.75rem;
+            border-left: 4px solid var(--doctor-color);
+        }
+
+        .original-text, .translated-text {
+            padding: 1rem;
+        }
+
+        .original-text {
+            background: rgba(255, 255, 255, 0.03);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .text-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        .text-content {
+            font-size: 1rem;
+            line-height: 1.5;
+            color: var(--text-primary);
+        }
+
+        .audio-player {
+            padding: 1rem;
+            background: var(--background-dark);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .play-btn {
+            width: 2.5rem;
+            height: 2.5rem;
+            border: none;
+            border-radius: 50%;
+            background: var(--primary-blue);
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .play-btn:hover {
+            background: var(--primary-blue-dark);
+            transform: scale(1.05);
+        }
+
+        .audio-info {
+            flex: 1;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-muted);
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .empty-state h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .side-panel {
+                position: static;
+                max-width: 100%;
+            }
+            
+            .chat-container {
+                height: 60vh;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 0 1rem;
+            }
+            
+            .main-container {
+                padding: 1rem;
+                gap: 1rem;
+            }
+            
+            .logo h1 {
+                font-size: 1.25rem;
+            }
+            
+            .chat-header {
+                padding: 1rem;
+            }
+            
+            .chat-stats {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loading-dots {
+            display: inline-block;
+        }
+
+        .loading-dots::after {
+            content: '';
+            animation: dots 1.5s steps(5, end) infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: ''; }
+            40% { content: '.'; }
+            60% { content: '..'; }
+            80%, 100% { content: '...'; }
+        }
+
+        /* Accessibility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Focus styles */
+        button:focus,
+        select:focus {
+            outline: 2px solid var(--primary-blue);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-stethoscope"></i>
+                <h1>MedTranslate Pro</h1>
+            </div>
+            <div class="header-controls">
+                <div class="session-info">
+                    <i class="fas fa-shield-alt"></i>
+                    <span>Secure Session Active</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Patient Panel -->
+        <div class="side-panel patient-panel">
+            <div class="panel-header">
+                <div class="icon">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div>
+                    <h3>Patient</h3>
+                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">Speak in your language</p>
+                </div>
+            </div>
+
+            <div class="language-select">
+                <label for="patientLang">Your Language</label>
+                <select id="patientLang">
+                    {% for code, info in languages.items() %}
+                        <option value="{{ code }}">{{ info.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="recording-controls">
+                <button id="patientRecordBtn" class="record-btn idle">
+                    <i class="fas fa-microphone"></i>
+                    <span>Tap to Speak</span>
+                </button>
+                <div id="patientStatus" class="status-indicator status-idle">
+                    Ready to listen
+                </div>
+            </div>
+
+            <div class="quick-phrases">
+    
+                
+            </div>
+        </div>
+
+        <!-- Chat Container -->
+        <div class="chat-container">
+            <div class="chat-header">
+                <h2>Live Translation Session</h2>
+                <div class="chat-stats">
+                    <span><i class="fas fa-clock"></i> Session: <span id="sessionTime">00:00</span></span>
+                    <span><i class="fas fa-comments"></i> Messages: <span id="messageCount">0</span></span>
+                    <span><i class="fas fa-language"></i> Languages: <span id="activeLanguages">English ⟷ Spanish</span></span>
+                </div>
+            </div>
+            
+            <div class="chat-messages" id="chatMessages">
+                <div class="empty-state">
+                    <i class="fas fa-comments"></i>
+                    <h3>Start Your Conversation</h3>
+                    <p>Click the microphone buttons to begin translating speech in real-time.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Doctor Panel -->
+        <div class="side-panel doctor-panel">
+            <div class="panel-header">
+                <div class="icon">
+                    <i class="fas fa-user-md"></i>
+                </div>
+                <div>
+                    <h3>Healthcare Provider</h3>
+                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">Professional interface</p>
+                </div>
+            </div>
+
+            <div class="language-select">
+                <label for="doctorLang">Your Language</label>
+                <select id="doctorLang">
+                    {% for code, info in languages.items() %}
+                        <option value="{{ code }}" {% if code == 'en' %}selected{% endif %}>{{ info.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="recording-controls">
+                <button id="doctorRecordBtn" class="record-btn idle">
+                    <i class="fas fa-microphone"></i>
+                    <span>Record Message</span>
+                </button>
+                <div id="doctorStatus" class="status-indicator status-idle">
+                    Ready to record
+                </div>
+            </div>
+
+            <div class="quick-phrases">
+                
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class MedTranslatePro {
+            constructor() {
+                this.sessionId = this.generateSessionId();
+                this.sessionStartTime = Date.now();
+                this.messageCount = 0;
+                this.isRecording = false;
+                this.currentRecorder = null;
+                this.mediaStream = null;
+                this.audioChunks = [];
+                
+                this.initializeElements();
+                this.setupEventListeners();
+                this.startSessionTimer();
+                this.updateLanguageDisplay();
+            }
+
+            generateSessionId() {
+                return 'session_' + Math.random().toString(36).substr(2, 9) + '_' + Date.now();
+            }
+
+            initializeElements() {
+                // Patient elements
+                this.patientRecordBtn = document.getElementById('patientRecordBtn');
+                this.patientStatus = document.getElementById('patientStatus');
+                this.patientLang = document.getElementById('patientLang');
+
+                // Doctor elements
+                this.doctorRecordBtn = document.getElementById('doctorRecordBtn');
+                this.doctorStatus = document.getElementById('doctorStatus');
+                this.doctorLang = document.getElementById('doctorLang');
+
+                // Chat elements
+                this.chatMessages = document.getElementById('chatMessages');
+                this.sessionTimeEl = document.getElementById('sessionTime');
+                this.messageCountEl = document.getElementById('messageCount');
+                this.activeLanguagesEl = document.getElementById('activeLanguages');
+            }
+
+            setupEventListeners() {
+                // Recording buttons
+                this.patientRecordBtn.addEventListener('click', () => this.toggleRecording('patient'));
+                this.doctorRecordBtn.addEventListener('click', () => this.toggleRecording('doctor'));
+
+                // Language selection
+                this.patientLang.addEventListener('change', () => this.updateLanguageDisplay());
+                this.doctorLang.addEventListener('change', () => this.updateLanguageDisplay());
+
+                // Quick phrases
+                document.querySelectorAll('.phrase-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const phrase = e.target.dataset.phrase;
+                        const role = e.target.closest('.patient-panel') ? 'patient' : 'doctor';
+                        this.simulateTranslation(phrase, role);
+                    });
+                });
+
+                // Keyboard shortcuts
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === ' ' && e.ctrlKey) {
+                        e.preventDefault();
+                        this.toggleRecording('patient');
+                    } else if (e.key === ' ' && e.altKey) {
+                        e.preventDefault();
+                        this.toggleRecording('doctor');
+                    }
+                });
+            }
+
+            async toggleRecording(role) {
+                if (this.isRecording) {
+                    this.stopRecording();
+                } else {
+                    await this.startRecording(role);
+                }
+            }
+
+            async startRecording(role) {
+                try {
+                    const stream = await navigator.mediaDevices.getUserMedia({ 
+                        audio: {
+                            echoCancellation: true,
+                            noiseSuppression: true,
+                            autoGainControl: true
+                        }
+                    });
+                    
+                    this.mediaStream = stream;
+                    this.audioChunks = [];
+                    this.currentRole = role;
+                    
+                    const options = {};
+                    if (MediaRecorder.isTypeSupported('audio/webm;codecs=opus')) {
+                        options.mimeType = 'audio/webm;codecs=opus';
+                    }
+                    
+                    this.recorder = new MediaRecorder(stream, options);
+                    
+                    this.recorder.ondataavailable = (e) => {
+                        if (e.data && e.data.size > 0) {
+                            this.audioChunks.push(e.data);
+                        }
+                    };
+
+                    this.recorder.onstop = () => {
+                        this.processRecording();
+                    };
+
+                    this.recorder.start();
+                    this.isRecording = true;
+                    this.updateRecordingUI(role, 'recording');
+                    this.updateStatus(role, 'Listening... <i class="fas fa-circle" style="color: red; animation: pulse 1s infinite;"></i>', 'listening');
+
+                } catch (error) {
+                    console.error('Error accessing microphone:', error);
+                    this.updateStatus(role, 'Microphone access denied', 'error');
+                }
+            }
+
+            stopRecording() {
+                if (this.recorder && this.recorder.state !== 'inactive') {
+                    this.recorder.stop();
+                    this.isRecording = false;
+                    this.updateRecordingUI(this.currentRole, 'processing');
+                    
+                    if (this.mediaStream) {
+                        this.mediaStream.getTracks().forEach(track => track.stop());
+                        this.mediaStream = null;
+                    }
+                }
+            }
+
+            async processRecording() {
+                const role = this.currentRole;
+                this.updateStatus(role, 'Processing audio<span class="loading-dots"></span>', 'processing');
+
+                try {
+                    const audioBlob = new Blob(this.audioChunks, { 
+                        type: this.audioChunks[0]?.type || 'audio/webm' 
+                    });
+                    
+                    const formData = new FormData();
+                    formData.append('audio', audioBlob, 'recording.webm');
+                    formData.append('from_lang', role === 'patient' ? this.patientLang.value : this.doctorLang.value);
+                    formData.append('to_lang', role === 'patient' ? this.doctorLang.value : this.patientLang.value);
+
+                    const response = await fetch('/translate', {
+                        method: 'POST',
+                        headers: {
+                            'X-Session-ID': this.sessionId
+                        },
+                        body: formData
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok) {
+                        this.addMessage(role, data.original_text, data.translated_text, data.audio_url);
+                        this.updateStatus(role, '✓ Translation complete!', 'success');
+                        
+                        // Show processing time if available
+                        if (data.processing_time) {
+                            setTimeout(() => {
+                                this.updateStatus(role, `Processed in ${data.processing_time.toFixed(1)}s`, 'success');
+                            }, 1000);
+                        }
+                        
+                        // Reset status after 3 seconds
+                        setTimeout(() => {
+                            this.updateStatus(role, 'Ready to record', 'idle');
+                        }, 3000);
+                    } else {
+                        throw new Error(data.error || 'Translation failed');
+                    }
+
+                } catch (error) {
+                    console.error('Translation error:', error);
+                    this.updateStatus(role, 'Translation failed. Try again.', 'error');
+                    
+                    setTimeout(() => {
+                        this.updateStatus(role, 'Ready to record', 'idle');
+                    }, 3000);
+                }
+
+                this.updateRecordingUI(role, 'idle');
+            }
+
+            simulateTranslation(phrase, role) {
+                const fromLang = role === 'patient' ? this.patientLang.value : this.doctorLang.value;
+                const toLang = role === 'patient' ? this.doctorLang.value : this.patientLang.value;
+                
+                // Enhanced mock translations
+                const mockTranslations = {
+                    'I need help': { 
+                        'es': 'Necesito ayuda', 
+                        'fr': "J'ai besoin d'aide", 
+                        'de': 'Ich brauche Hilfe',
+                        'ur': 'مجھے مدد چاہیے'
+                    },
+                    'How are you feeling?': { 
+                        'es': '¿Cómo te sientes?', 
+                        'fr': 'Comment vous sentez-vous?', 
+                        'de': 'Wie fühlen Sie sich?',
+                        'ur': 'آپ کیسا محسوس کر رہے ہیں؟'
+                    },
+                    'I have pain here': {
+                        'es': 'Tengo dolor aquí',
+                        'fr': 'J\'ai mal ici',
+                        'de': 'Ich habe hier Schmerzen',
+                        'ur': 'مجھے یہاں درد ہے'
+                    },
+                    'Please describe your symptoms': {
+                        'es': 'Por favor describe tus síntomas',
+                        'fr': 'Veuillez décrire vos symptômes',
+                        'de': 'Bitte beschreiben Sie Ihre Symptome',
+                        'ur': 'برائے کرم اپنی علامات بیان کریں'
+                    }
+                };
+                
+                const translated = mockTranslations[phrase]?.[toLang] || `[${phrase} → ${toLang}]`;
+                
+                this.addMessage(role, phrase, translated, null);
+                this.updateStatus(role, '✓ Quick phrase sent!', 'success');
+                
+                setTimeout(() => {
+                    this.updateStatus(role, 'Ready to record', 'idle');
+                }, 2000);
+            }
+
+            addMessage(role, originalText, translatedText, audioUrl) {
+                // Remove empty state if present
+                const emptyState = this.chatMessages.querySelector('.empty-state');
+                if (emptyState) {
+                    emptyState.remove();
+                }
+
+                const messageEl = document.createElement('div');
+                messageEl.className = `message message-${role}`;
+                
+                const timestamp = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+                const roleName = role === 'patient' ? 'Patient' : 'Healthcare Provider';
+                const avatar = role === 'patient' ? 'P' : 'Dr';
+
+                messageEl.innerHTML = `
+                    <div class="message-header">
+                        <div class="message-avatar">${avatar}</div>
+                        <div class="message-info">
+                            <div class="message-role">${roleName}</div>
+                            <div class="message-time">${timestamp}</div>
+                        </div>
+                    </div>
+                    <div class="message-content">
+                        <div class="original-text">
+                            <div class="text-label">Original (${this.getLanguageName(role === 'patient' ? this.patientLang.value : this.doctorLang.value)})</div>
+                            <div class="text-content">${originalText}</div>
+                        </div>
+                        <div class="translated-text">
+                            <div class="text-label">Translated (${this.getLanguageName(role === 'patient' ? this.doctorLang.value : this.patientLang.value)})</div>
+                            <div class="text-content">${translatedText}</div>
+                        </div>
+                        ${audioUrl ? `
+                        <div class="audio-player">
+                            <button class="play-btn" onclick="this.nextElementSibling.play()">
+                                <i class="fas fa-play"></i>
+                            </button>
+                            <audio src="${audioUrl}" preload="metadata"></audio>
+                            <div class="audio-info">
+                                <i class="fas fa-volume-up"></i>
+                                Click to hear translation
+                            </div>
+                        </div>
+                        ` : ''}
+                    </div>
+                `;
+
+                this.chatMessages.appendChild(messageEl);
+                this.chatMessages.scrollTop = this.chatMessages.scrollHeight;
+                
+                this.messageCount++;
+                this.messageCountEl.textContent = this.messageCount;
+            }
+
+            updateRecordingUI(role, state) {
+                const btn = role === 'patient' ? this.patientRecordBtn : this.doctorRecordBtn;
+                const icon = btn.querySelector('i');
+                const text = btn.querySelector('span');
+                
+                btn.className = `record-btn ${state}`;
+                
+                switch (state) {
+                    case 'recording':
+                        icon.className = 'fas fa-stop';
+                        text.textContent = 'Stop Recording';
+                        break;
+                    case 'processing':
+                        icon.className = 'fas fa-cog fa-spin';
+                        text.textContent = 'Processing...';
+                        btn.disabled = true;
+                        break;
+                    case 'idle':
+                    default:
+                        icon.className = 'fas fa-microphone';
+                        text.textContent = role === 'patient' ? 'Tap to Speak' : 'Record Message';
+                        btn.disabled = false;
+                        break;
+                }
+            }
+
+            updateStatus(role, message, type) {
+                const statusEl = role === 'patient' ? this.patientStatus : this.doctorStatus;
+                statusEl.innerHTML = message;
+                statusEl.className = `status-indicator status-${type}`;
+            }
+
+            updateLanguageDisplay() {
+                const patientLangName = this.getLanguageName(this.patientLang.value);
+                const doctorLangName = this.getLanguageName(this.doctorLang.value);
+                this.activeLanguagesEl.textContent = `${patientLangName} ⟷ ${doctorLangName}`;
+            }
+
+            getLanguageName(code) {
+                const languages = {
+                    'en': 'English',
+                    'es': 'Spanish', 
+                    'fr': 'French',
+                    'de': 'German',
+                    'ur': 'Urdu',
+                    'zh': 'Chinese',
+                    'ja': 'Japanese',
+                    'tr': 'Turkish'
+                };
+                return languages[code] || code.toUpperCase();
+            }
+
+            startSessionTimer() {
+                setInterval(() => {
+                    const elapsed = Date.now() - this.sessionStartTime;
+                    const minutes = Math.floor(elapsed / 60000);
+                    const seconds = Math.floor((elapsed % 60000) / 1000);
+                    this.sessionTimeEl.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                }, 1000);
+            }
+        }
+
+        // Initialize the app when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            window.medTranslate = new MedTranslatePro();
+            
+            // Show welcome message for demo
+            setTimeout(() => {
+                const welcomeDiv = document.createElement('div');
+                welcomeDiv.style.cssText = `
+                    position: fixed;
+                    bottom: 20px;
+                    right: 20px;
+                    background: linear-gradient(135deg, #0066cc, #00a693);
+                    color: white;
+                    padding: 1rem 1.5rem;
+                    border-radius: 0.75rem;
+                    box-shadow: 0 10px 25px rgba(0, 102, 204, 0.3);
+                    z-index: 1000;
+                    font-size: 0.875rem;
+                    max-width: 300px;
+                    animation: slideInUp 0.5s ease-out;
+                `;
+                
+                welcomeDiv.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Demo Mode</strong>
+                    </div>
+                    <p style="margin: 0;">Press Ctrl+D to see a sample conversation, or start recording!</p>
+                `;
+                
+                document.body.appendChild(welcomeDiv);
+                
+                // Remove after 5 seconds
+                setTimeout(() => {
+                    welcomeDiv.style.animation = 'slideOutDown 0.5s ease-in';
+                    setTimeout(() => welcomeDiv.remove(), 500);
+                }, 5000);
+            }, 2000);
+        });
+
+        // Demo functionality
+        document.addEventListener('keydown', (e) => {
+            if (e.key.toLowerCase() === 'd' && e.ctrlKey) {
+                e.preventDefault();
+                const demo = window.medTranslate;
+                
+                // Simulate a realistic healthcare conversation
+                demo.addMessage('patient', 'Hello doctor, I have been having chest pain for two days', 'Hola doctor, he tenido dolor en el pecho durante dos días', null);
+                
+                setTimeout(() => {
+                    demo.addMessage('doctor', 'I understand. Can you describe the pain? Is it sharp or dull?', 'Entiendo. ¿Puedes describir el dolor? ¿Es agudo o sordo?', null);
+                }, 2000);
+                
+                setTimeout(() => {
+                    demo.addMessage('patient', 'It feels like a pressure, especially when I breathe deeply', 'Se siente como una presión, especialmente cuando respiro profundo', null);
+                }, 4000);
+                
+                setTimeout(() => {
+                    demo.addMessage('doctor', 'When did this pain start? Was it sudden or gradual?', '¿Cuándo comenzó este dolor? ¿Fue repentino o gradual?', null);
+                }, 6000);
+            }
+        });
+
+        // Add CSS animations for the welcome message
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInUp {
+                from {
+                    transform: translateY(100px);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+            }
+            
+            @keyframes slideOutDown {
+                from {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateY(100px);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Service Worker Registration for PWA capabilities
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => console.log('SW registered'))
+                    .catch(error => console.log('SW registration failed'));
+            });
+        }
+
+        // Performance monitoring
+        window.addEventListener('load', () => {
+            if ('performance' in window) {
+                const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
+                console.log(`MedTranslate Pro loaded in ${loadTime}ms`);
+            }
+        });
+    </script>
+</body>
+</html>

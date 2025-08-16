@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - MedTranslate Pro</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-blue: #0066cc;
+            --primary-blue-dark: #0052a3;
+            --secondary-teal: #00a693;
+            --accent-orange: #ff6b35;
+            --background-dark: #0f1419;
+            --background-card: #1a1f2e;
+            --background-light: #252b3b;
+            --text-primary: #ffffff;
+            --text-secondary: #b4bcc8;
+            --text-muted: #6b7280;
+            --border-color: #374151;
+            --success-green: #10b981;
+            --warning-yellow: #f59e0b;
+            --error-red: #ef4444;
+            --patient-color: #3b82f6;
+            --doctor-color: #10b981;
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, var(--background-dark) 0%, #1e293b 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow-x: hidden;
+            padding: 1rem 0;
+        }
+
+        /* Animated background elements */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.1), rgba(0, 166, 147, 0.1));
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .floating-shape:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: 5%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .floating-shape:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            top: 50%;
+            right: 10%;
+            animation-delay: 3s;
+        }
+
+        .floating-shape:nth-child(3) {
+            width: 150px;
+            height: 150px;
+            bottom: 10%;
+            left: 15%;
+            animation-delay: 6s;
+        }
+
+        .floating-shape:nth-child(4) {
+            width: 100px;
+            height: 100px;
+            top: 20%;
+            right: 30%;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-30px) rotate(5deg);
+            }
+            50% {
+                transform: translateY(20px) rotate(-5deg);
+            }
+            75% {
+                transform: translateY(-10px) rotate(3deg);
+            }
+        }
+
+        /* Register container */
+        .register-container {
+            background: var(--background-card);
+            border-radius: 2rem;
+            box-shadow: var(--shadow-xl);
+            border: 1px solid var(--border-color);
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 500px;
+            position: relative;
+            backdrop-filter: blur(20px);
+            z-index: 10;
+            margin: 1rem;
+        }
+
+        .register-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .logo-icon {
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: 1rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-teal));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.75rem;
+        }
+
+        .register-header h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-teal));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .register-header p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Role Selection */
+        .role-selection {
+            margin-bottom: 2rem;
+        }
+
+        .role-selection h3 {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            text-align: center;
+        }
+
+        .role-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .role-option {
+            position: relative;
+        }
+
+        .role-radio {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .role-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.5rem 1rem;
+            background: var(--background-light);
+            border: 2px solid var(--border-color);
+            border-radius: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            position: relative;
+        }
+
+        .role-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .role-radio:checked + .role-card {
+            border-color: var(--primary-blue);
+            background: rgba(0, 102, 204, 0.1);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .role-radio:checked + .role-card::before {
+            content: '✓';
+            position: absolute;
+            top: -0.5rem;
+            right: -0.5rem;
+            background: var(--primary-blue);
+            color: white;
+            width: 1.5rem;
+            height: 1.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .role-icon {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .patient-card .role-icon {
+            background: linear-gradient(135deg, var(--patient-color), #60a5fa);
+            color: white;
+        }
+
+        .doctor-card .role-icon {
+            background: linear-gradient(135deg, var(--doctor-color), #34d399);
+            color: white;
+        }
+
+        .role-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .role-description {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        /* Form styles */
+        .register-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .form-input, .form-select {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            background: var(--background-light);
+            border: 2px solid var(--border-color);
+            border-radius: 0.75rem;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .input-wrapper .form-input {
+            padding-left: 2.75rem;
+        }
+
+        .password-strength {
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+        }
+
+        .strength-bar {
+            height: 4px;
+            background: var(--border-color);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .strength-fill {
+            height: 100%;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .strength-weak .strength-fill {
+            width: 33%;
+            background: var(--error-red);
+        }
+
+        .strength-medium .strength-fill {
+            width: 66%;
+            background: var(--warning-yellow);
+        }
+
+        .strength-strong .strength-fill {
+            width: 100%;
+            background: var(--success-green);
+        }
+
+        .strength-text {
+            color: var(--text-muted);
+        }
+
+        .register-button {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-blue-dark));
+            border: none;
+            border-radius: 0.75rem;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .register-button:hover {
+            box-shadow: 0 0 20px rgba(0, 102, 204, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .register-button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .register-button:hover:before {
+            left: 100%;
+        }
+
+        .register-button:disabled {
+            background: var(--text-muted);
+            cursor: not-allowed;
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .form-footer a {
+            color: var(--primary-blue);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .form-footer a:hover {
+            color: var(--secondary-teal);
+        }
+
+        .error-message {
+            color: var(--error-red);
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+    </div>
+
+    <div class="register-container">
+        <div class="register-header">
+            <div class="logo-container">
+                <div class="logo-icon">
+                    <i class="fas fa-stethoscope"></i>
+                </div>
+                <h1>Create Your Account</h1>
+            </div>
+            <p>Join our community for seamless healthcare communication.</p>
+        </div>
+
+        <div class="role-selection">
+            <h3>Select Your Role</h3>
+            <div class="role-options">
+                <label class="role-option patient-option">
+                    <input type="radio" name="role" value="patient" class="role-radio" checked>
+                    <div class="role-card patient-card">
+                        <div class="role-icon">
+                            <i class="fas fa-user-injured"></i>
+                        </div>
+                        <h4 class="role-title">Patient</h4>
+                        <p class="role-description">Access your healthcare provider and communicate your needs easily.</p>
+                    </div>
+                </label>
+                <label class="role-option doctor-option">
+                    <input type="radio" name="role" value="doctor" class="role-radio">
+                    <div class="role-card doctor-card">
+                        <div class="role-icon">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <h4 class="role-title">Healthcare Provider</h4>
+                        <p class="role-description">Communicate with patients and provide care efficiently.</p>
+                    </div>
+                </label>
+            </div>
+        </div>
+
+        <form id="registerForm" class="register-form">
+            <div class="form-group">
+                <label for="username" class="form-label">Username</label>
+                <div class="input-wrapper">
+                    <i class="fas fa-user input-icon"></i>
+                    <input type="text" id="username" name="username" class="form-input" placeholder="Choose a username" required autocomplete="username">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password" class="form-label">Password</label>
+                <div class="input-wrapper">
+                    <i class="fas fa-lock input-icon"></i>
+                    <input type="password" id="password" name="password" class="form-input" placeholder="Create a password" required autocomplete="new-password">
+                </div>
+            </div>
+
+            <button type="submit" class="register-button">
+                Register
+                <i class="fas fa-arrow-right ml-2"></i>
+            </button>
+            <p id="error-message" class="error-message" style="display: none;"></p>
+
+        </form>
+
+        <div class="form-footer">
+            Already have an account? <a href="/login_page">Log In</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const role = document.querySelector('input[name="role"]:checked').value;
+
+            fetch('/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password, role })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const errorMessage = document.getElementById('error-message');
+                if (data.error) {
+                    errorMessage.textContent = data.error;
+                    errorMessage.style.display = 'block';
+                } else {
+                    window.location.href = '/login_page';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                const errorMessage = document.getElementById('error-message');
+                errorMessage.textContent = 'Registration failed. Please try again.';
+                errorMessage.style.display = 'block';
+            });
+        });
+    </script>
+</body>
+</html>
