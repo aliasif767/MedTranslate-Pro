@@ -667,7 +667,7 @@
                 </div>
                 <div>
                     <h3>Healthcare Provider</h3>
-                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">Professional interface</p>
+                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem;">Speak in your language</p>
                 </div>
             </div>
 
@@ -889,30 +889,7 @@
                 
                 // Enhanced mock translations
                 const mockTranslations = {
-                    'I need help': { 
-                        'es': 'Necesito ayuda', 
-                        'fr': "J'ai besoin d'aide", 
-                        'de': 'Ich brauche Hilfe',
-                        'ur': 'مجھے مدد چاہیے'
-                    },
-                    'How are you feeling?': { 
-                        'es': '¿Cómo te sientes?', 
-                        'fr': 'Comment vous sentez-vous?', 
-                        'de': 'Wie fühlen Sie sich?',
-                        'ur': 'آپ کیسا محسوس کر رہے ہیں؟'
-                    },
-                    'I have pain here': {
-                        'es': 'Tengo dolor aquí',
-                        'fr': 'J\'ai mal ici',
-                        'de': 'Ich habe hier Schmerzen',
-                        'ur': 'مجھے یہاں درد ہے'
-                    },
-                    'Please describe your symptoms': {
-                        'es': 'Por favor describe tus síntomas',
-                        'fr': 'Veuillez décrire vos symptômes',
-                        'de': 'Bitte beschreiben Sie Ihre Symptome',
-                        'ur': 'برائے کرم اپنی علامات بیان کریں'
-                    }
+                    
                 };
                 
                 const translated = mockTranslations[phrase]?.[toLang] || `[${phrase} → ${toLang}]`;
@@ -1080,28 +1057,7 @@
             }, 2000);
         });
 
-        // Demo functionality
-        document.addEventListener('keydown', (e) => {
-            if (e.key.toLowerCase() === 'd' && e.ctrlKey) {
-                e.preventDefault();
-                const demo = window.medTranslate;
-                
-                // Simulate a realistic healthcare conversation
-                demo.addMessage('patient', 'Hello doctor, I have been having chest pain for two days', 'Hola doctor, he tenido dolor en el pecho durante dos días', null);
-                
-                setTimeout(() => {
-                    demo.addMessage('doctor', 'I understand. Can you describe the pain? Is it sharp or dull?', 'Entiendo. ¿Puedes describir el dolor? ¿Es agudo o sordo?', null);
-                }, 2000);
-                
-                setTimeout(() => {
-                    demo.addMessage('patient', 'It feels like a pressure, especially when I breathe deeply', 'Se siente como una presión, especialmente cuando respiro profundo', null);
-                }, 4000);
-                
-                setTimeout(() => {
-                    demo.addMessage('doctor', 'When did this pain start? Was it sudden or gradual?', '¿Cuándo comenzó este dolor? ¿Fue repentino o gradual?', null);
-                }, 6000);
-            }
-        });
+        
 
         // Add CSS animations for the welcome message
         const style = document.createElement('style');
